@@ -38,6 +38,13 @@ std::string GetLastErrorAsString()
 
 int main()
 {
+    time_t now = time(0);
+    tm tmInfo;
+    localtime_s(&tmInfo, &now);
+    char buffer[101];
+    strftime(buffer + 21, 80, "%Y-%m-%d %X", &tmInfo);
+    memcpy(buffer, "Connected Devices at ", 21);
+    SetConsoleTitleA(buffer);
 
 
     HDEVINFO device_info_list = SetupDiGetClassDevs(NULL, NULL, NULL, DIGCF_ALLCLASSES | DIGCF_PRESENT);
